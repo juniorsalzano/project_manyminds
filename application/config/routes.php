@@ -58,9 +58,16 @@ $route['login']  = 'login/index';
 $route['store']  = 'login/store';
 $route['logout'] = 'login/logout';
 
-//Rodas so usuario
-$route['signup']                            = 'usuario/signup';
-$route['cadastrar']                         = 'usuario/cadastrar';
-$route['usuario/dados/(:any)']              = 'usuario/dados/$1';
-$route['usuario/endereco']                  = 'endereco/index';
-$route['usuario/(:any)/endereco/cadastrar'] = 'endereco/cadastrar';
+//Rodas de usuario
+$route['signup']                           = 'usuario/signup';
+$route['cadastrar']                        = 'usuario/cadastrar';
+$route['usuario/dados/(:any)']             = 'usuario/dados/$1';
+
+$route['usuario/endereco']                 = 'endereco/index';
+$route['usuario/endereco/cadastrar']       = 'endereco/cadastrar';
+$route['usuario/endereco/deletar/(:any)']  = 'endereco/deletar/$1';
+$route['usuario/endereco/editar/(:any)']   = 'endereco/editar/$1';
+$route['usuario/endereco/update/(:any)']   = 'endereco/update/$1';
+
+$route['fornecedor/cadastro/novo']         = 'fornecedor/novo';
+$route['fornecedor/cadastrar']             = 'fornecedor/cadastrar';

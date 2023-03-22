@@ -25,7 +25,7 @@
 
           <?php if ($_SESSION['tipoOperador'] == 'C') {?>
 					<li class="nav-item">
-            <a class="nav-link" href="">
+            <a class="nav-link" href="<?php echo base_url()?>fornecedor/cadastro/novo">
               <span data-feather="file"></span>
               <img src="<?php echo base_url() ?>application/assets/img/cadastrofornecedor.png" alt="" width="32" height="32">Cadastro de fornecedores
             </a>

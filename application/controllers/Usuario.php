@@ -3,14 +3,6 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Usuario extends CI_Controller {
 
-	public function index()
-	{
-		$data['title'] = 'Usuario - Manyminds';
-
-		$this->load->view('pages/usuario',$data);
-
-	}
-
 	public function signup(){
 		$data['title'] = "Novo usuário - Manyminds";
 		$this->load->view('pages/signup',$data);
@@ -18,7 +10,7 @@ class Usuario extends CI_Controller {
 
 	public function dados() {
 		permission();
-		$data['title'] = 'Dados no usuário - Manyminds';
+		$data['title'] = 'Dados do usuário - Manyminds';
 		$data['dadosUsuario'] = $_SESSION['logged_user'];
 
 		if($data['dadosUsuario']['tipo'] == 'C'){
@@ -48,11 +40,16 @@ class Usuario extends CI_Controller {
 		$this->load->model('usuario_model');
 		$data['erro'] = '';
 
+		$vLocalCadastro = '';
+		if (isset($_POST['localCadastro'])) {
+			$vLocalCadastro = $_POST['localCadastro'];
+		}
+
 		if (!isset($_POST['email'])) {
 			$data['erro'] = $data['erro'].'Email não informado.<br>';	
 		} else {
 			if ($this->usuario_model->getEmail($_POST['email'])){
-				$data['erro'] = $data['erro'].'Email já cadastrado.<br>';
+				$data['erro'] = $data['erro'].'Email '.$_POST['email'].' já cadastrado.<br>';
 			}
 		}
 	
@@ -71,7 +68,7 @@ class Usuario extends CI_Controller {
 		if ((!isset($_POST['tipo']) || ($_POST['tipo'] == ''))) {
 			$data['erro'] = $data['erro'].'Tipo do usuário não informado.<br>';	
 		}
-
+		
 		if ($data['erro'] != '') {
 			$this->load->view('pages/signup',$data);
 		} else {
@@ -79,11 +76,20 @@ class Usuario extends CI_Controller {
 			$usuario['nome']  					= $_POST['nome'];
 			$usuario['dataNascimento']  = $_POST['dataNascimento'];
 			$usuario['senha']           = md5($_POST['senha']);
-			$usuario['tipo']            = $_POST['tipo'];
+			$usuario['tipo']            = ($vLocalCadastro != '') ? $vLocalCadastro : $_POST['tipo'];
 			$usuario['situacao']        = 'A';
  			$data['mensagem'] = "Cadastrado com sucesso!";
 			$this->usuario_model->cadastrar($usuario);
 			$this->load->view('pages/login',$data);
 		}
+	}
+
+	public function novo(){
+		$data['title'] = 'Cadastro de fornecedores - Manyminds';
+		$this->load->view('templates/header'   				 ,$data);
+		$this->load->view('templates/nav-top'  				 ,$data);
+		$this->load->view('pages/form-cadastro-usuario',$data);
+		$this->load->view('templates/footer'  				 ,$data);
+		$this->load->view('templates/js'      				 ,$data);
 	}
 }

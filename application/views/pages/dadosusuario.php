@@ -27,7 +27,7 @@
       <div class="row">
 
         <div class="col-md-8 order-md-1">
-          <h4 class="mb-3"><?php echo $dadosUsuario['nome'];?> Situação: <?php echo $descSituacaoUsuario;?> </h4>
+          <h4 class="mb-3"><?php echo $dadosUsuario['nome'];?> </h4>
           <h4 class="mb-3">Situação: <?php echo $descSituacaoUsuario;?> </h4>
           <form class="needs-validation" novalidate>
           <div>
@@ -79,6 +79,7 @@
             <th scope="col">Estado</th>
             <th scope="col">Cidade</th>
             <th scope="col">Bairro</th>
+            <th scope="col"></th>
           </tr>
         </thead>
         <tbody>
@@ -90,6 +91,17 @@
               <td><?php echo $end['uf'];?></td>
               <td><?php echo $end['cidade'];?></td>
               <td><?php echo $end['bairro'];?></td>
+              <td>
+
+                <a href="<?php echo base_url()?>usuario/endereco/editar/<?php echo $end['id'];?>" class="btn btn-primary btn-sm btn-warning">
+                  <i class="fas fa-pencil-alt"></i>
+                </a>
+
+                <a href="javascript:goDelete('<?php echo base_url().'usuario/endereco/deletar/'.$end['id']?>');" class="btn btn-primary btn-sm btn-danger">
+                  <i class="fas fa-trash-alt"></i>
+                </a> 
+                
+              </td>
             </tr>
             <?php } ?>
           </tbody>
@@ -108,3 +120,12 @@
     <script src="../../assets/js/vendor/holder.min.js"></script>
   </body>
 </html>
+
+<script>
+  function goDelete(url) {
+    if(confirm('Deseja realmente excluir esse endereço ?')){
+      window.location.href = url;
+    } 
+  }
+
+</script>

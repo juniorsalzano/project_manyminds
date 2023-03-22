@@ -17,21 +17,21 @@
       <div class="col-md-6">
         <div class="form-group">
           <label for="cep">CEP</label>
-          <input type="text" class="form-control" name="cep" id="cep" placeholder="CEP" value="" maxlength="9" required>
+          <input type="text" class="form-control" name="cep" id="cep" placeholder="CEP" value="<?php echo $dados_endereco['cep']?>" maxlength="9" required>
         </div>
       </div>
       
       <div class="col-md-6">
         <div class="form-group">
           <label for="endereco">Endereço</label>
-          <input type="text" class="form-control" name="endereco" id="endereco" placeholder="Endereço" value="" required>
+          <input type="text" class="form-control" name="endereco" id="endereco" placeholder="Endereço" value="<?php echo $dados_endereco['endereco']?>" required>
         </div>
       </div>
 
       <div class="col-md-6">
         <div class="form-group">
           <label for="numero">Número</label>
-          <input type="text" class="form-control" name="numero" id="numero" placeholder="numero" value="" required>
+          <input type="text" class="form-control" name="numero" id="numero" placeholder="numero" value="<?php echo $dados_endereco['numero']?>" required>
         </div>
       </div>
 
@@ -73,14 +73,14 @@
       <div class="col-md-6">
         <div class="form-group">
           <label for="cidade">Cidade</label>
-          <input type="text" class="form-control" name="cidade" id="cidade" placeholder="Cidade" value="" required>
+          <input type="text" class="form-control" name="cidade" id="cidade" placeholder="Cidade" value="<?php echo $dados_endereco['cidade']?>" required>
         </div>
       </div>
 
       <div class="col-md-6">
         <div class="form-group">
           <label for="bairro">Bairro</label>
-          <input type="text" class="form-control" name="bairro" id="bairro" placeholder="Bairro" value="" required>
+          <input type="text" class="form-control" name="bairro" id="bairro" placeholder="Bairro" value="<?php echo $dados_endereco['cep']?>" required>
         </div>
       </div>
 
