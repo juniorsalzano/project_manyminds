@@ -3,6 +3,28 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Fornecedor extends CI_Controller {
 
+	function __construct() {
+		parent::__construct();
+		permission();
+  }
+
+	public function novo(){
+		$data['title'] = 'Cadastro de fornecedores - Manyminds';
+		$this->reloadNovo($data);
+	}
+
+	public function reloadNovo($data){
+
+		$this->load->model('usuario_model');
+		$data['fornecedores'] = $this->usuario_model->listaFornecedores();
+		$data['title'] = 'Cadastro de fornecedores - Manyminds';
+		$this->load->view('templates/header'   				    ,$data);
+		$this->load->view('templates/nav-top'  				    ,$data);
+		$this->load->view('pages/form-cadastro-fornecedor',$data);
+		$this->load->view('templates/footer'  				    ,$data);
+		$this->load->view('templates/js'      				    ,$data);
+	}
+
 	public function cadastrar(){
 		$usuario = array();
 		$this->load->model('usuario_model');
@@ -41,19 +63,5 @@ class Fornecedor extends CI_Controller {
 			$this->usuario_model->cadastrar($usuario);
 			$this->reloadNovo($data);
 		}
-	}
-
-	public function novo(){
-		$data['title'] = 'Cadastro de fornecedores - Manyminds';
-		$this->reloadNovo($data);
-	}
-
-	public function reloadNovo($data){
-		$data['title'] = 'Cadastro de fornecedores - Manyminds';
-		$this->load->view('templates/header'   				    ,$data);
-		$this->load->view('templates/nav-top'  				    ,$data);
-		$this->load->view('pages/form-cadastro-fornecedor',$data);
-		$this->load->view('templates/footer'  				    ,$data);
-		$this->load->view('templates/js'      				    ,$data);
 	}
 }

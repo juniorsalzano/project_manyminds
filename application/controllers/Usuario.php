@@ -3,13 +3,17 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Usuario extends CI_Controller {
 
+	function __construct() {
+		parent::__construct();
+		permission();
+  }
+
 	public function signup(){
 		$data['title'] = "Novo usuário - Manyminds";
 		$this->load->view('pages/signup',$data);
 	}
 
 	public function dados() {
-		permission();
 		$data['title'] = 'Dados do usuário - Manyminds';
 		$data['dadosUsuario'] = $_SESSION['logged_user'];
 

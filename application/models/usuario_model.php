@@ -27,6 +27,12 @@ class Usuario_model extends CI_Model{
     $user = $this->db->get("usuario")->row_array();
     return $user;
   }
+
+  public function listaFornecedores(){
+    $this->db->where("tipo",'F');
+    $forn = $this->db->get("usuario")->result_array();
+    return $forn;
+  }
 }
 
 

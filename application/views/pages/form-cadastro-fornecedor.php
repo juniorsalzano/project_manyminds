@@ -6,7 +6,8 @@
   </div>
 
   <div class="col-md-12">
-  <h5>Cadastro de fornecedores</h5>
+
+    <h5>Cadastro de fornecedores</h5>
     <?php if ((isset($erro)) && ($erro != '')){ ?>
     <div class="alert alert-danger" role="alert">
       <?php echo $erro?>
@@ -55,6 +56,50 @@
       </div>
     </form>
   </div>
+  
+
+  <div class="col-md-12" style="margin-top:50px;">
+    <div class="row">
+
+    <?php if (count($fornecedores) > 0) {?>
+
+      <h4 class="mb-3">Fornecedores cadastrados </h4>
+      <table class="table table-bordered">
+      <thead>
+        <tr>
+          <th scope="col">Nome</th>
+          <th scope="col">Email</th>
+          <th scope="col">Data de nascimento</th>
+          <th scope="col">Situação</th>
+          <th scope="col"></th>
+        </tr>
+      </thead>
+      <tbody>
+        <?php foreach($fornecedores as $fornec) {?>
+          <tr>
+            <td><?php echo $fornec['nome'];?></td>
+            <td><?php echo $fornec['email'];?></td>
+            <td><?php echo $fornec['dataNascimento'];?></td>
+            <td><?php echo ($fornec['situacao'] == 'A') ? 'Ativo' : 'Inativo';?></td>
+            <td>
+
+              <a href="#" class="btn btn-primary btn-sm btn-warning">
+                <i class="fas fa-pencil-alt"></i>
+              </a>
+
+              <a href="#" class="btn btn-primary btn-sm btn-danger">
+                <i class="fas fa-trash-alt"></i>
+              </a> 
+              
+            </td>
+          </tr>
+          <?php } ?>
+        </tbody>
+      </table>
+      <?php }?>
+    </div>
+  </div>
+
 
 </main>
 
