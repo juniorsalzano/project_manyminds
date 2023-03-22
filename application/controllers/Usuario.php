@@ -44,11 +44,6 @@ class Usuario extends CI_Controller {
 		$this->load->model('usuario_model');
 		$data['erro'] = '';
 
-		$vLocalCadastro = '';
-		if (isset($_POST['localCadastro'])) {
-			$vLocalCadastro = $_POST['localCadastro'];
-		}
-
 		if (!isset($_POST['email'])) {
 			$data['erro'] = $data['erro'].'Email não informado.<br>';	
 		} else {
@@ -80,7 +75,7 @@ class Usuario extends CI_Controller {
 			$usuario['nome']  					= $_POST['nome'];
 			$usuario['dataNascimento']  = $_POST['dataNascimento'];
 			$usuario['senha']           = md5($_POST['senha']);
-			$usuario['tipo']            = ($vLocalCadastro != '') ? $vLocalCadastro : $_POST['tipo'];
+			$usuario['tipo']            = $_POST['tipo'];
 			$usuario['situacao']        = 'A';
  			$data['mensagem'] = "Cadastrado com sucesso!";
 			$this->usuario_model->cadastrar($usuario);

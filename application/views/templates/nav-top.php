@@ -34,7 +34,7 @@
 
 
           <li class="nav-item">
-            <a class="nav-link" href="">
+            <a class="nav-link" href="<?php echo base_url()?>produto">
               <span data-feather="shopping-cart"></span>
               <img src="<?php echo base_url() ?>application/assets/img/cadastroprodutos.png" alt="" width="32" height="32">Cadastro de Produtos
             </a>

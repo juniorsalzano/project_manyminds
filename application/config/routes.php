@@ -71,3 +71,6 @@ $route['usuario/endereco/update/(:any)']   = 'endereco/update/$1';
 
 $route['fornecedor/cadastro/novo']         = 'fornecedor/novo';
 $route['fornecedor/cadastrar']             = 'fornecedor/cadastrar';
+
+$route['produto']                          = 'produto/index';
+$route['produto/cadastrar']                = 'produto/cadastrar';

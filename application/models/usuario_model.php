@@ -3,7 +3,6 @@
 class Usuario_model extends CI_Model{
   
   public function cadastrar($pUsuario){
-    $this->load->model("usuario_model");
 		$this->db->insert('usuario',$pUsuario);
   }
 
