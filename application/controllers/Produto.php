@@ -64,4 +64,19 @@ class Produto extends CI_Controller {
 			$this->reloadProduto($data);
 		}
 	}
+
+	public function updatestatus($id){
+		$this->load->model('produto_model');
+		$forn = $this->produto_model->getProduto($id);
+		$data['id'] = $id;
+		if($forn['situacao'] == 'A') {
+			$data['situacao'] = 'C';
+		}else {
+			$data['situacao'] = 'A';
+		}
+
+		$this->produto_model->update($data);
+
+		$this->reloadProduto($data);
+	}
 }

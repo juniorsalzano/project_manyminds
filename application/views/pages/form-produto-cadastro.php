@@ -77,17 +77,20 @@
           <tr>
             <td><?php echo $prod['codigo'];?></td>
             <td><?php echo $prod['descricao'];?></td>
-            <td><?php echo $prod['usuarioId'];?></td>
+            <td><?php echo $prod['usuarioNome'];?></td>
             <td><?php echo ($prod['situacao'] == 'A') ? 'Ativo' : 'Inativo';?></td>
             <td>
 
-              <a href="#" class="btn btn-primary btn-sm btn-warning">
-                <i class="fas fa-pencil-alt"></i>
-              </a>
-
-              <a href="#" class="btn btn-primary btn-sm btn-danger">
-                <i class="fas fa-trash-alt"></i>
+              <?php if ($prod['situacao'] == 'C') {?>
+              <a href="javascript:updateStatusProduto('<?php echo base_url().'produto/updatestatus/'.$prod['id']?>');" class="btn btn-primary btn-sm btn-success">
+                <i class="fas fa-thumbs-up"></i> Ativar
               </a> 
+              <?php } else {?>
+
+              <a href="javascript:updateStatusProduto('<?php echo base_url().'produto/updatestatus/'.$prod['id']?>');" class="btn btn-primary btn-sm btn-danger">
+                <i class="fas fa-thumbs-down"></i> Inativar
+              </a> 
+              <?php }?>
               
             </td>
           </tr>
@@ -101,3 +104,11 @@
 
 </main>
 
+<script>
+  function updateStatusProduto(url) {
+    if(confirm('Deseja realmente alterar a situação desse produto ?')){
+      window.location.href = url;
+    } 
+  }
+
+</script>

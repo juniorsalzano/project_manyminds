@@ -75,3 +75,4 @@ $route['fornecedor/updatestatus/(:any)']   = 'fornecedor/updatestatus/$1';
 
 $route['produto']                          = 'produto/index';
 $route['produto/cadastrar']                = 'produto/cadastrar';
+$route['produto/updatestatus/(:any)']      = 'produto/updatestatus/$1';

@@ -41,6 +41,12 @@ class Usuario_model extends CI_Model{
     $forn = $this->db->get("usuario")->result_array();
     return $forn;
   }
+
+  public function retornaNomeUsuario($pUsuarioId){
+    $this->db->where("id",$pUsuarioId);
+    $user = $this->db->get("usuario")->row_array();
+    return $user['nome'];
+  }
 }
 
 
