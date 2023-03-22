@@ -42,7 +42,7 @@
 
           <?php if ($_SESSION['tipoOperador'] == 'C') {?>
 					<li class="nav-item">
-            <a class="nav-link" href="">
+            <a class="nav-link" href="<?php echo base_url()?>pedido">
               <span data-feather="shopping-cart"></span>
               <img src="<?php echo base_url() ?>application/assets/img/novo-pedido.png" alt="" width="32" height="32">Novo Pedidos
             </a>

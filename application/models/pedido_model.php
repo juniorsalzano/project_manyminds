@@ -1,20 +1,16 @@
 <?php
 
-class Produto_model extends CI_Model{
+class Pedido_model extends CI_Model{
   
-  public function cadastrar($pProduto){
-		$this->db->insert('produto',$pProduto);
+  public function cadastrar($pPedido){
+		$this->db->insert('pedido',$pPedido);
+    return $this->db->insert_id();
   }
 
   public function lista($pStatus){
     if ($pStatus != 'T') {
       $this->db->where('situacao',$pStatus);
     }
-
-    if ($_SESSION['tipoOperador'] == 'F') {
-      $this->db->where('usuarioId',$_SESSION['id_logado']);
-    }
-    
     $produtos = $this->db->get("produto")->result_array();
     $prodResult = array();
     $vCount = 0;
@@ -32,23 +28,11 @@ class Produto_model extends CI_Model{
     return $prodResult;
   }
 
-  public function getCodigoFornecedor($pCodigo, $pFornecedor){
-    $this->db->where("codigo"   ,$pCodigo);
-    $this->db->where("usuarioId",$pFornecedor);
-    $prod = $this->db->get("produto")->row_array();
-    return $prod;
-  }
-
   public function update($pProduto){
     $this->db->where('id',$pProduto['id']);
     return $this->db->update('produto',$pProduto);
   }
 
-  public function getProduto($id){
-    $this->db->where("id",$id);
-    $prod = $this->db->get("produto")->row_array();
-    return $prod;
-  }
 }
 
 

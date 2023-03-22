@@ -36,7 +36,7 @@
     <link href="https://getbootstrap.com/docs/4.4/examples/sign-in/signin.css" rel="stylesheet">
   </head>
   <body class="text-center">
-  <form class="form-signin" method="post" action="<?php base_url()?>store">  
+  <form class="form-signin" method="post" action="<?php echo base_url()?>store">  
   <img class="mb-4" src="<?php echo base_url() ?>application/assets/img/manyminds.png" alt="" width="300" height="100">
 
   <?php if (isset($mensagem)){ ?>
@@ -50,7 +50,7 @@
   <label for="inputPassword" class="sr-only">Senha</label>
   <input type="password" name="password" id="inputPassword" class="form-control" placeholder="Senha" required>
 	<p>
-		<a href="<?php base_url()?>signup">Não tem uma conta?</a>
+		<a href="<?php echo base_url()?>signup">Não tem uma conta?</a>
 	</p>
   <button class="btn btn-lg btn-primary btn-block" type="submit">Entrar</button>
   <p class="mt-5 mb-3 text-muted">&copy; 2023</p>

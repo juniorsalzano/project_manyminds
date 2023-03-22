@@ -37,18 +37,19 @@
         </div>
       </div>
 
-
-      <div class="col-md-6">
-        <div class="form-group">
-          <label for="numero">Fornecedor</label>
-          <select id="fornecedor" name="fornecedor" class="form-control">
-          <option>---Selecione---</option>
-          <?php foreach($lista_fornecedores as $forn) {?>
-          <option value="<?php echo $forn['id']?>"><?php echo $forn['nome']?></option>
-          <?php }?>
-          </select>
+      <?php if($_SESSION['tipoOperador'] <> 'F') {?>
+        <div class="col-md-6">
+          <div class="form-group">
+            <label for="numero">Fornecedor</label>
+            <select id="fornecedor" name="fornecedor" class="form-control">
+            <option>---Selecione---</option>
+            <?php foreach($lista_fornecedores as $forn) {?>
+            <option value="<?php echo $forn['id']?>"><?php echo $forn['nome']?></option>
+            <?php }?>
+            </select>
+          </div>
         </div>
-      </div>
+      <?php }?>
       <div class="col-md-6">
         <button type="submit" class="btn btn-success btn-xs"><i class="fas fa-check"></i>Cadastrar</button>
       </div>

@@ -5,7 +5,6 @@ class Usuario extends CI_Controller {
 
 	function __construct() {
 		parent::__construct();
-		permission();
   }
 
 	public function signup(){
@@ -14,6 +13,7 @@ class Usuario extends CI_Controller {
 	}
 
 	public function dados() {
+		permission();
 		$data['title'] = 'Dados do usuário - Manyminds';
 		$data['dadosUsuario'] = $_SESSION['logged_user'];
 
@@ -84,6 +84,7 @@ class Usuario extends CI_Controller {
 	}
 
 	public function novo(){
+		permission();
 		$data['title'] = 'Cadastro de fornecedores - Manyminds';
 		$this->load->view('templates/header'   				 ,$data);
 		$this->load->view('templates/nav-top'  				 ,$data);
