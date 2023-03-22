@@ -15,6 +15,12 @@ class Usuario_model extends CI_Model{
 
   }
 
+  public function update($pUsuario){
+    $this->db->where('id',$pUsuario['id']);
+    return $this->db->update('usuario',$pUsuario);
+  }
+
+
   public function getEmail($pEmail){
     $this->db->where("email",$pEmail);
     $user = $this->db->get("usuario")->row_array();
@@ -27,8 +33,11 @@ class Usuario_model extends CI_Model{
     return $user;
   }
 
-  public function listaFornecedores(){
-    $this->db->where("tipo",'F');
+  public function listaFornecedores($pSituacao){
+    $this->db->where("tipo"    ,'F');
+    if ($pSituacao != 'T') {
+      $this->db->where('situacao',$pSituacao);
+    }
     $forn = $this->db->get("usuario")->result_array();
     return $forn;
   }

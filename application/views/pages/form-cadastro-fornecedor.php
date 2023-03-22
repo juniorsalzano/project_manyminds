@@ -83,13 +83,16 @@
             <td><?php echo ($fornec['situacao'] == 'A') ? 'Ativo' : 'Inativo';?></td>
             <td>
 
-              <a href="#" class="btn btn-primary btn-sm btn-warning">
-                <i class="fas fa-pencil-alt"></i>
-              </a>
-
-              <a href="#" class="btn btn-primary btn-sm btn-danger">
-                <i class="fas fa-trash-alt"></i>
+              <?php if ($fornec['situacao'] == 'C') {?>
+              <a href="javascript:updateStatus('<?php echo base_url().'fornecedor/updatestatus/'.$fornec['id']?>');" class="btn btn-primary btn-sm btn-success">
+                <i class="fas fa-thumbs-up"></i> Ativar
               </a> 
+              <?php } else {?>
+
+              <a href="javascript:updateStatus('<?php echo base_url().'fornecedor/updatestatus/'.$fornec['id']?>');" class="btn btn-primary btn-sm btn-danger">
+                <i class="fas fa-thumbs-down"></i> Inativar
+              </a> 
+              <?php }?>
               
             </td>
           </tr>
@@ -99,7 +102,14 @@
       <?php }?>
     </div>
   </div>
-
-
 </main>
+
+<script>
+  function updateStatus(url) {
+    if(confirm('Deseja realmente alterar a situação desse fornecedor ?')){
+      window.location.href = url;
+    } 
+  }
+
+</script>
 

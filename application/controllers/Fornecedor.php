@@ -16,7 +16,7 @@ class Fornecedor extends CI_Controller {
 	public function reloadNovo($data){
 
 		$this->load->model('usuario_model');
-		$data['fornecedores'] = $this->usuario_model->listaFornecedores();
+		$data['fornecedores'] = $this->usuario_model->listaFornecedores('T');
 		$data['title'] = 'Cadastro de fornecedores - Manyminds';
 		$this->load->view('templates/header'   				    ,$data);
 		$this->load->view('templates/nav-top'  				    ,$data);
@@ -63,5 +63,20 @@ class Fornecedor extends CI_Controller {
 			$this->usuario_model->cadastrar($usuario);
 			$this->reloadNovo($data);
 		}
+	}
+
+	public function updateStatus($id){
+		$this->load->model('usuario_model');
+		$forn = $this->usuario_model->getUsuario($id);
+		$data['id'] = $id;
+		if($forn['situacao'] == 'A') {
+			$data['situacao'] = 'C';
+		}else {
+			$data['situacao'] = 'A';
+		}
+
+		$this->usuario_model->update($data);
+
+		$this->reloadNovo($data);
 	}
 }

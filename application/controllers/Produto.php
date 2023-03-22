@@ -15,9 +15,9 @@ class Produto extends CI_Controller {
 
 	public function reloadProduto($data){
 		$data['title'] = 'Cadastro de produtos - Manyminds';
-
+		
 		$this->load->model('usuario_model');
-		$data['lista_fornecedores'] = $this->usuario_model->listaFornecedores();
+		$data['lista_fornecedores'] = $this->usuario_model->listaFornecedores('A');
 		
 		$this->load->model('produto_model');
 		$data['produtos'] = $this->produto_model->lista();
@@ -58,11 +58,10 @@ class Produto extends CI_Controller {
 			$produto['usuarioId']  = $_POST['fornecedor'];
 			$produto['codigo']  	 = $_POST['codigo'];
 			$produto['descricao']  = $_POST['descricao'];
-			$produto['situacao']        = 'A';
+			$produto['situacao']   = 'A';
 			$this->produto_model->cadastrar($produto);
 			$data['mensagem'] = "Cadastrado com sucesso!";
 			$this->reloadProduto($data);
 		}
 	}
-
 }
