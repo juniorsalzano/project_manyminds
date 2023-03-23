@@ -1,3 +1,4 @@
+
 <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
   
 
@@ -6,7 +7,7 @@
   </div>
 
   <div class="col-md-12">
-
+    <input type="hidden" name="baseurl" id="baseurl" value="<?php echo base_url()?>">
     <h5>Cadastro de pedidos</h5>
     <?php if ((isset($erro)) && ($erro != '')){ ?>
     <div class="alert alert-danger" role="alert">
@@ -31,7 +32,7 @@
 
       <div class="col-md-6">
         <div class="form-group">
-          <label for="numero">Fornecedor</label>
+          <label for="fornecedor">Fornecedor</label>
           <select id="fornecedor" name="fornecedor" class="form-control">
           <option>---Selecione---</option>
           <?php foreach($lista_fornecedores as $forn) {?>
@@ -43,13 +44,10 @@
 
       <div class="col-md-6">
         <div class="form-group">
-          <label for="numero">Produto</label>
-          <select id="produto" name="produto" class="form-control">
-          <option>---Selecione---</option>
-          <?php foreach($lista_produtos as $prod) {?>
-          <option value="<?php echo $prod['id']?>"><?php echo $prod['descricao']?></option>
-          <?php }?>
-          </select>
+          <label for="produto">Produto</label>
+          <div id="select-produto">
+
+          </div>
         </div>
       </div>
 
@@ -67,3 +65,51 @@
   </div>
   
 </main>
+
+<script>
+  $(document).ready(function () {
+
+    vSelectDefault = '<select id="produto" name="produto" class="form-control">'+
+                     '<option value="">---Selecione o fornecedor---</option>'+
+                     '</select>';
+
+    $('#select-produto').append(vSelectDefault);
+    $("#produto").prop("disabled", true);
+
+    $("#fornecedor").change(function() {
+      var id = $('#fornecedor').val();
+      if (id > 0) {
+        var vUrl = $('#baseurl').val()+'produto/fornecedor/listar/'+id;
+        $.ajax({
+          type: 'POST',
+          url: vUrl,
+          dataType: 'json',
+          data:{
+            fornecedorId : id
+          },
+            success: function(data) {
+            if (data.length > 0) {
+
+              vItens = '<select id="produto" name="produto" class="form-control">';
+              $.each(data, function (key, item) {
+                console.log(item.codigo);
+                vItens = vItens + '<option value="'+item.id+'">'+item.codigo+' - '+item.descricao+'</option>';
+              });
+
+              vItens = vItens + '</select>';
+              $("#select-produto").html(vItens);
+
+              $("#produto").prop("disabled", false);
+            } else {
+              alert('Não existe produtos cadastrado para este fornecedor');
+              $("#select-produto").html(vSelectDefault);
+              $("#produto").prop("disabled", true);
+            }        
+          }
+        });
+      }
+    });
+  
+  });
+
+</script>

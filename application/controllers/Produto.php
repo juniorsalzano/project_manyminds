@@ -5,7 +5,7 @@ class Produto extends CI_Controller {
 
 	function __construct() {
 		parent::__construct();
-		//permission();
+		permission();
   }
 
 	public function index(){
@@ -85,5 +85,16 @@ class Produto extends CI_Controller {
 		$this->produto_model->update($data);
 
 		$this->reloadProduto($data);
+	}
+
+	public function listar () {
+		$id = $_POST['fornecedorId'];
+		$this->load->model('produto_model');
+		$produtos = $this->produto_model->produtoFornecedor($id);
+
+		echo json_encode($produtos);
+
+		exit();
+
 	}
 }

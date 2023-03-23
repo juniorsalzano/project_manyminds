@@ -74,4 +74,39 @@ class Pedido extends CI_Controller {
 		}
 	}
 
+	public function updatestatus($id){
+		$this->load->model('pedido_model');
+		$ped = $this->pedido_model->getPedido($id);
+		$data['id'] = $id;
+		
+		if($ped['situacao'] == 'P') {
+			$data['situacao'] = 'F';
+		}
+
+		$this->pedido_model->update($data);
+
+		$data['title'] = 'Lista de pedidos - Manyminds';
+
+		$this->load->model('pedido_model');
+		$data['pedidos'] = $this->pedido_model->lista('T');
+
+		$this->load->view('templates/header'   				 ,$data);
+		$this->load->view('templates/nav-top'  				 ,$data);
+		$this->load->view('pages/form-pedido-listar'   ,$data);
+		$this->load->view('templates/footer'  				 ,$data);
+		$this->load->view('templates/js'      				 ,$data);
+	}
+
+	public function listar(){
+		$data['title'] = 'Lista de pedidos - Manyminds';
+
+		$this->load->model('pedido_model');
+		$data['pedidos'] = $this->pedido_model->lista('T');
+
+		$this->load->view('templates/header'   				 ,$data);
+		$this->load->view('templates/nav-top'  				 ,$data);
+		$this->load->view('pages/form-pedido-listar'   ,$data);
+		$this->load->view('templates/footer'  				 ,$data);
+		$this->load->view('templates/js'      				 ,$data);
+	}
 }

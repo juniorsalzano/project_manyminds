@@ -32,11 +32,11 @@ class Usuario extends CI_Controller {
 		$this->load->model('usuarioEndereco_model');
 		$data['enderecos'] = $this->usuarioEndereco_model->getUsuarioEndereco($_SESSION['id_logado']);		
 
-		$this->load->view('templates/header'  ,$data);
-		$this->load->view('templates/nav-top' ,$data);
-		$this->load->view('pages/dadosusuario',$data);
-		$this->load->view('templates/footer'  ,$data);
-		$this->load->view('templates/js'      ,$data);
+		$this->load->view('templates/header'  						 ,$data);
+		$this->load->view('templates/nav-top' 						 ,$data);
+		$this->load->view('pages/form-usuario-dadosusuario',$data);
+		$this->load->view('templates/footer'  						 ,$data);
+		$this->load->view('templates/js'      						 ,$data);
 	}
 
 	public function cadastrar(){

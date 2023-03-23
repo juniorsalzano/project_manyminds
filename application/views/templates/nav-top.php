@@ -3,12 +3,6 @@
     <a class="navbar-brand col-sm-3 col-md-2 mr-0" href="<?php echo base_url()?>">
       <b>Manyminds - Sistemas <img src="<?php echo base_url() ?>application/assets/img/manyminds.png" alt="" width="130" height="32"></b>
     </a>
-  
-  <ul class="navbar-nav px-3">
-    <li class="nav-item text-nowrap">
-      <a class="nav-link" href="<?php echo base_url()?>login/logout">Sair</a>
-    </li>
-  </ul>
 </nav>
 
 <div class="container-fluid">
@@ -50,11 +44,19 @@
           <?php }?>
           
           <li class="nav-item">
-            <a class="nav-link" href="">
+            <a class="nav-link" href="<?php echo base_url()?>pedido/listar">
               <span data-feather="shopping-cart"></span>
               <img src="<?php echo base_url() ?>application/assets/img/listar-pedido.png" alt="" width="32" height="32">Lista de pedidos
             </a>
           </li>
+
+          <li class="nav-item">
+            <a class="nav-link" href="<?php echo base_url()?>login/logout">
+              <span data-feather="shopping-cart"></span>
+              <img src="<?php echo base_url() ?>application/assets/img/logout.png" alt="" width="32" height="32">Logout
+            </a>
+          </li>
+
         </ul>
       </div>
     </nav>

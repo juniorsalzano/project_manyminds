@@ -1,6 +1,12 @@
 <?php
 
 class Pedido_model extends CI_Model{
+
+  public function getPedido($pPedidoId){
+    $this->db->where("id",$pPedidoId);
+    $ped = $this->db->get("pedido")->row_array();
+    return $ped;
+  }
   
   public function cadastrar($pPedido){
 		$this->db->insert('pedido',$pPedido);
@@ -8,29 +14,44 @@ class Pedido_model extends CI_Model{
   }
 
   public function lista($pStatus){
-    if ($pStatus != 'T') {
-      $this->db->where('situacao',$pStatus);
+    if ($_SESSION['tipoOperador'] == 'F') {
+      $this->db->where('fornecedorId',$_SESSION['id_logado']);
     }
-    $produtos = $this->db->get("produto")->result_array();
-    $prodResult = array();
+
+    $pedidos = $this->db->get("pedido")->result_array();
+    $pedResult = array();
     $vCount = 0;
 
     $this->load->model('usuario_model');
-    foreach($produtos as $prod) {
-      $prodResult[$vCount]['id']          = $prod['id'];
-      $prodResult[$vCount]['usuarioId']   = $prod['usuarioId'];
-      $prodResult[$vCount]['usuarioNome'] = $this->usuario_model->retornaNomeUsuario($prod['usuarioId']);
-      $prodResult[$vCount]['codigo']      = $prod['codigo'];
-      $prodResult[$vCount]['descricao']   = $prod['descricao'];
-      $prodResult[$vCount]['situacao']    = $prod['situacao'];
+    $this->load->model('produto_model');
+    $this->load->model('colaboradorpedido_model');
+    foreach($pedidos as $ped) {
+      $pedResult[$vCount]['id']                    = $ped['id'];
+      $pedResult[$vCount]['fornecedorId']          = $ped['fornecedorId'];
+      $pedResult[$vCount]['fornecedorDescricao']   = $this->usuario_model->retornaNomeUsuario($ped['fornecedorId']);
+      $pedResult[$vCount]['produtoId']             = $ped['produtoId'];
+      $pedResult[$vCount]['produtoDescricao']      = $this->produto_model->retornaDescricaoProduto($ped['produtoId']);
+      $pedResult[$vCount]['codigo']                = $ped['codigo'];
+      $pedResult[$vCount]['descricao']             = $ped['descricao'];
+      $pedResult[$vCount]['situacao']              = $ped['situacao'];
+      $pedResult[$vCount]['dataPedido']            = $ped['dataPedido'];
+      $pedResult[$vCount]['quantidade']            = $ped['quantidade'];
+      $pedResult[$vCount]['colaborador']           = $this->colaboradorpedido_model->retornaNomeColaborador($ped['id']);
+
+      if ($pedResult[$vCount]['situacao'] == 'F') {
+        $pedResult[$vCount]['situacaoDescricao'] = 'Finalizado';
+      } else {
+        $pedResult[$vCount]['situacaoDescricao'] = 'Pendente';
+      }
+
       $vCount++;
     }
-    return $prodResult;
+    return $pedResult;
   }
 
-  public function update($pProduto){
-    $this->db->where('id',$pProduto['id']);
-    return $this->db->update('produto',$pProduto);
+  public function update($pPedido){
+    $this->db->where('id',$pPedido['id']);
+    return $this->db->update('pedido',$pPedido);
   }
 
 }

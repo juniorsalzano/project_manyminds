@@ -6,6 +6,13 @@ class Produto_model extends CI_Model{
 		$this->db->insert('produto',$pProduto);
   }
 
+  public function produtoFornecedor($id){
+    $this->db->where('usuarioId',$id);
+    $this->db->where('situacao' ,'A');
+    $prod = $this->db->get("produto")->result_array();
+    return $prod;
+  }
+
   public function lista($pStatus){
     if ($pStatus != 'T') {
       $this->db->where('situacao',$pStatus);
@@ -48,6 +55,12 @@ class Produto_model extends CI_Model{
     $this->db->where("id",$id);
     $prod = $this->db->get("produto")->row_array();
     return $prod;
+  }
+
+  public function retornaDescricaoProduto($id){
+    $this->db->where("id",$id);
+    $prod = $this->db->get("produto")->row_array();
+    return $prod['descricao'];
   }
 }
 

@@ -76,6 +76,9 @@ $route['fornecedor/updatestatus/(:any)']   = 'fornecedor/updatestatus/$1';
 $route['produto']                          = 'produto/index';
 $route['produto/cadastrar']                = 'produto/cadastrar';
 $route['produto/updatestatus/(:any)']      = 'produto/updatestatus/$1';
+$route['produto/fornecedor/listar/(:any)'] = 'produto/listar/$1';
 
 $route['pedido']                           = 'pedido/index';
 $route['pedido/cadastrar']                 = 'pedido/cadastrar';
+$route['pedido/listar']                    = 'pedido/listar';
+$route['pedido/updatestatus/(:any)']       = 'pedido/updatestatus/$1';
